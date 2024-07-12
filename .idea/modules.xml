@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/agreement-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/agreement-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/invitation-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/invitation-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/organisation-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/organisation-service.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/salaryby.iml" filepath="$PROJECT_DIR$/.idea/salaryby.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/user-agreement-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/user-agreement-service.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/user-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/user-service.main.iml" />
     </modules>
   </component>
