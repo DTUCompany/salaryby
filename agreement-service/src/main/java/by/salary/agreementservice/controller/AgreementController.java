@@ -31,7 +31,7 @@ public class AgreementController {
             @ApiResponse(responseCode = "404", description = "The agreement you were trying to reach is not found")
     })
     @GetMapping
-    public List<AgreementResponseDTO> getAllAgreements() throws AgreementNotFoundException {
+    public List<AgreementResponseDTO> getAllAgreements() {
         return agreementService.getAllAgreements();
     }
 
@@ -50,8 +50,8 @@ public class AgreementController {
             @ApiResponse(responseCode = "201", description = "Successfully created agreement")
     })
     @PostMapping
-    public AgreementResponseDTO createAgreement(@RequestBody AgreementRequestDTO agreementResponseDTO) {
-        return agreementService.createAgreement(agreementResponseDTO);
+    public AgreementResponseDTO createAgreement(@RequestBody AgreementRequestDTO agreementRequestDTO) {
+        return agreementService.createAgreement(agreementRequestDTO);
     }
 
     @Operation(summary = "Update an agreement")

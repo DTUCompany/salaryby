@@ -2,15 +2,13 @@ package by.salary.agreementservice.model;
 
 
 import by.salary.agreementservice.entity.AgreementState;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
+@Setter
 public class AgreementStateResponseDTO {
     private Long id;
 

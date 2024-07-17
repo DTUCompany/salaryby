@@ -3,7 +3,7 @@ package by.salary.agreementservice.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -12,17 +12,17 @@ import java.util.ArrayList;
 @Getter
 @Setter
 public class AgreementList {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @JoinColumn(name = "agreementId")
     @ManyToOne
+    @JoinColumn(name = "agreementId")
     private Agreement agreement;
 
     private String agreementListName;
 
-    @JoinColumn(name = "agreementListId")
-    @OneToMany
-    private ArrayList<AgreementState> agreementStates;
+    @OneToMany(mappedBy = "agreementList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<AgreementState> agreementStates;
 }

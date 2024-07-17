@@ -5,8 +5,6 @@ import by.salary.agreementservice.exceptions.AgreementNotFoundException;
 import by.salary.agreementservice.model.AgreementListRequestDTO;
 import by.salary.agreementservice.model.AgreementListResponseDTO;
 import by.salary.agreementservice.repo.AgreementListRepository;
-import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -61,5 +59,22 @@ public class AgreementListService {
         }
         agreementList.get().setAgreementListName(agreementListRequestDTO.getAgreementListName());
         return new AgreementListResponseDTO(agreementListRepository.save(agreementList.get()));
+    }
+
+    public AgreementList getAgreementListObjectById(Long agreementListId) {
+        Optional<AgreementList> agreementList = agreementListRepository.findById(agreementListId);
+        if (agreementList.isEmpty()) {
+            throw new AgreementNotFoundException("Agreement list with id: " + agreementListId + " not found", HttpStatus.NOT_FOUND);
+        }
+        return agreementList.get();
+    }
+
+    public AgreementListResponseDTO deleteAgreementList(Long agreementListId) {
+        Optional<AgreementList> agreementList = agreementListRepository.findById(agreementListId);
+        if (agreementList.isEmpty()) {
+            throw new AgreementNotFoundException("Agreement list with id: " + agreementListId + " not found", HttpStatus.NOT_FOUND);
+        }
+        agreementListRepository.delete(agreementList.get());
+        return new AgreementListResponseDTO(agreementList.get());
     }
 }

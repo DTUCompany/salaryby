@@ -1,17 +1,16 @@
 package by.salary.agreementservice.model;
 
 import by.salary.agreementservice.entity.AgreementList;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
+@Setter
 public class AgreementListResponseDTO {
 
     private Long id;
@@ -23,7 +22,7 @@ public class AgreementListResponseDTO {
     public AgreementListResponseDTO(AgreementList agreementList) {
         this.id = agreementList.getId();
         this.agreementListName = agreementList.getAgreementListName();
-        this.agreementStates = agreementList.getAgreementStates().stream()
+        this.agreementStates = agreementList.getAgreementStates() == null? null: agreementList.getAgreementStates().stream()
                 .map(AgreementStateResponseDTO::new)
                 .toList();
     }

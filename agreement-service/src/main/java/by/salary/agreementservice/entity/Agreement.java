@@ -3,7 +3,6 @@ package by.salary.agreementservice.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,8 +20,6 @@ public class Agreement {
 
     private String agreementName;
 
-    @JoinColumn(name = "agreementId")
-    @OneToMany
-    private ArrayList<AgreementList> agreementLists;
-
+    @OneToMany(mappedBy = "agreement", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<AgreementList> agreementLists;
 }
