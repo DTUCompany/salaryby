@@ -1,10 +1,7 @@
 package by.salary.agreementservice.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 
@@ -13,6 +10,7 @@ import java.util.ArrayList;
 @NoArgsConstructor
 @Builder
 @Getter
+@Setter
 public class AgreementList {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/agreementStates")
+@RequestMapping("/agreementstates")
 public class AgreementStateController {
 
     private final AgreementStateService agreementStateService;

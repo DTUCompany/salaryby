@@ -37,6 +37,14 @@ public class AgreementService {
         return new AgreementResponseDTO(agreement.get());
     }
 
+    public Agreement getAgreementObjectById(Long id) {
+        Optional<Agreement> agreement = agreementRepository.findById(id);
+        if (agreement.isEmpty()) {
+            throw new AgreementNotFoundException("Agreement with id: " + id + " not found", HttpStatus.NOT_FOUND);
+        }
+        return agreement.get();
+    }
+
     public AgreementResponseDTO createAgreement(AgreementRequestDTO agreementRequestDTO) {
         Agreement agreement = Agreement.builder()
                 .agreementName(agreementRequestDTO.getAgreementName())
