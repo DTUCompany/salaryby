@@ -1,0 +1,8 @@
+# Используем официальный образ PostgreSQL в качестве базового
+FROM postgres:latest
+
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=BNf775^&*9065
+ENV POSTGRES_DB=salaryby
+
+EXPOSE 5432
