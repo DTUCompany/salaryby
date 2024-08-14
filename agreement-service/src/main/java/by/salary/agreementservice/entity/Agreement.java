@@ -20,6 +20,6 @@ public class Agreement {
 
     private String agreementName;
 
-    @OneToMany(mappedBy = "agreement", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "agreement", cascade = CascadeType.ALL)
     private List<AgreementList> agreementLists;
 }
