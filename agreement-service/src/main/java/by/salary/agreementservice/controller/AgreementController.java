@@ -23,49 +23,30 @@ public class AgreementController {
     private final AgreementService agreementService;
 
     @Operation(summary = "View a list of available agreements")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully retrieved list"),
-            @ApiResponse(responseCode = "404", description = "The agreement you were trying to reach is not found")
-    })
     @GetMapping
     public List<AgreementResponseDTO> getAllAgreements() {
         return agreementService.getAllAgreements();
     }
 
     @Operation(summary = "Get an agreement by Id")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully retrieved agreement"),
-            @ApiResponse(responseCode = "404", description = "The agreement you were trying to reach is not found")
-    })
     @GetMapping("/{id}")
     public AgreementResponseDTO getAgreementById(@PathVariable Long id) throws AgreementNotFoundException {
         return agreementService.getAgreementById(id);
     }
 
     @Operation(summary = "Add a new agreement")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Successfully created agreement")
-    })
     @PostMapping
     public AgreementResponseDTO createAgreement(@RequestBody AgreementRequestDTO agreementRequestDTO) {
         return agreementService.createAgreement(agreementRequestDTO);
     }
 
     @Operation(summary = "Update an agreement")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully updated agreement"),
-            @ApiResponse(responseCode = "404", description = "The agreement you were trying to reach is not found")
-    })
     @PatchMapping("/{id}")
     public AgreementResponseDTO updateAgreement(@PathVariable Long id, @RequestBody AgreementRequestDTO agreementResponseDTO) throws AgreementNotFoundException {
         return agreementService.updateAgreement(id, agreementResponseDTO);
     }
 
     @Operation(summary = "Delete an agreement by Id")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully deleted agreement"),
-            @ApiResponse(responseCode = "404", description = "The agreement you were trying to delete is not found")
-    })
     @DeleteMapping("/{id}")
     public AgreementResponseDTO deleteAgreement(@PathVariable Long id) throws AgreementNotFoundException {
         return agreementService.deleteAgreement(id);

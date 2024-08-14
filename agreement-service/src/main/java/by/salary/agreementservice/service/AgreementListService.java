@@ -20,7 +20,6 @@ public class AgreementListService {
     private final AgreementListRepository agreementListRepository;
     private final AgreementService agreementService;
 
-
     public List<AgreementListResponseDTO> getAllAgreementLists() {
         return agreementListRepository.findAll().stream()
                 .map(AgreementListResponseDTO::new)

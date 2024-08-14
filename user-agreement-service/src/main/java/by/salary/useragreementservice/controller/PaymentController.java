@@ -2,12 +2,9 @@ package by.salary.useragreementservice.controller;
 
 import by.salary.useragreementservice.model.PaymentRequestDTO;
 import by.salary.useragreementservice.model.PaymentResponseDTO;
-import by.salary.useragreementservice.repo.UserRepository;
-import by.salary.useragreementservice.service.CustomerService;
 import by.salary.useragreementservice.service.PaymentService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
