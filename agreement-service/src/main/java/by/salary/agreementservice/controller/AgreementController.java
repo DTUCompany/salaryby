@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,14 +17,10 @@ import java.util.List;
 @Tag(name = "Agreement controller", description = "Agreement management system")
 @RestController
 @RequestMapping("/agreements")
+@RequiredArgsConstructor
 public class AgreementController {
 
     private final AgreementService agreementService;
-
-    @Autowired
-    public AgreementController(AgreementService agreementService) {
-        this.agreementService = agreementService;
-    }
 
     @Operation(summary = "View a list of available agreements")
     @ApiResponses(value = {

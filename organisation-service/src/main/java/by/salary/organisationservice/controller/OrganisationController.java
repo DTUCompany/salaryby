@@ -5,20 +5,17 @@ import by.salary.organisationservice.model.OrganisationRequestDTO;
 import by.salary.organisationservice.model.OrganisationResponseDTO;
 import by.salary.organisationservice.service.OrganisationService;
 import io.swagger.v3.oas.annotations.Operation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class OrganisationController {
 
-    private static OrganisationService organisationService;
-
-    @Autowired
-    public OrganisationController(OrganisationService organisationService) {
-        OrganisationController.organisationService = organisationService;
-    }
+    private final OrganisationService organisationService;
 
     @Operation(summary = "Get all organisations")
     @GetMapping

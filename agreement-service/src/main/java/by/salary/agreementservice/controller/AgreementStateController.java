@@ -8,7 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,15 +17,10 @@ import java.util.List;
 @Tag(name = "Agreement state controller", description = "Agreement state management system")
 @RestController
 @RequestMapping("/agreementstates")
+@RequiredArgsConstructor
 public class AgreementStateController {
 
     private final AgreementStateService agreementStateService;
-
-    @Autowired
-    public AgreementStateController(AgreementStateService agreementStateService) {
-        this.agreementStateService = agreementStateService;
-    }
-
 
     @Operation(summary = "View a list of available agreement states")
     @ApiResponses(value = {

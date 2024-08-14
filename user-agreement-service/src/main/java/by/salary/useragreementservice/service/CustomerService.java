@@ -8,24 +8,19 @@ import by.salary.useragreementservice.model.CustomerRequestDTO;
 import by.salary.useragreementservice.model.CustomerResponseDTO;
 import by.salary.useragreementservice.repo.CustomerRepository;
 import by.salary.useragreementservice.repo.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
     private final UserRepository userRepository;
-
-    @Autowired
-    public CustomerService(CustomerRepository customerRepository, UserRepository userRepository) {
-        this.customerRepository = customerRepository;
-        this.userRepository = userRepository;
-    }
 
     public List<CustomerResponseDTO> getAllCustomers() {
         return customerRepository.findAll().stream().map(CustomerResponseDTO::new).toList();

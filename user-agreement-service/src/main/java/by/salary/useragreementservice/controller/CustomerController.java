@@ -5,7 +5,7 @@ import by.salary.useragreementservice.model.CustomerRequestDTO;
 import by.salary.useragreementservice.model.CustomerResponseDTO;
 import by.salary.useragreementservice.service.CustomerService;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,14 +13,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/customers")
+@RequiredArgsConstructor
 public class CustomerController {
 
     private final CustomerService customerService;
 
-    @Autowired
-    public CustomerController(CustomerService customerService) {
-        this.customerService = customerService;
-    }
 
     @Operation(summary = "Get all customers")
     @GetMapping

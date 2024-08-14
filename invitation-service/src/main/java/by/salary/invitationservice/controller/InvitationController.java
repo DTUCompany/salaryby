@@ -5,6 +5,7 @@ import by.salary.invitationservice.model.InvitationRequestDTO;
 import by.salary.invitationservice.model.InvitationResponseDTO;
 import by.salary.invitationservice.service.InvitationService;
 import io.swagger.v3.oas.annotations.Operation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -12,14 +13,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/invitations")
+@RequiredArgsConstructor
 public class InvitationController {
 
-    private static InvitationService invitationService;
-
-    @Autowired
-    public InvitationController(InvitationService invitationService) {
-        InvitationController.invitationService = invitationService;
-    }
+    private final InvitationService invitationService;
 
     @GetMapping
     @Operation(summary = "Get all invitation codes")

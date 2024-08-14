@@ -5,7 +5,7 @@ import by.salary.invitationservice.exceptions.InvitationNotFoundException;
 import by.salary.invitationservice.model.InvitationRequestDTO;
 import by.salary.invitationservice.model.InvitationResponseDTO;
 import by.salary.invitationservice.repo.InvitationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -13,14 +13,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class InvitationService {
 
-    private static InvitationRepository invitationRepository;
+    private final InvitationRepository invitationRepository;
 
-    @Autowired
-    public InvitationService(InvitationRepository invitationRepository) {
-        InvitationService.invitationRepository = invitationRepository;
-    }
 
     public List<InvitationResponseDTO> getInvitationCode() {
         return invitationRepository.findAll()

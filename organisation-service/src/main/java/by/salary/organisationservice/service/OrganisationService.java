@@ -5,22 +5,18 @@ import by.salary.organisationservice.exceptions.OrganisationNotFoundException;
 import by.salary.organisationservice.model.OrganisationRequestDTO;
 import by.salary.organisationservice.model.OrganisationResponseDTO;
 import by.salary.organisationservice.repo.OrganisationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class OrganisationService {
 
-    private static OrganisationRepository organisationRepository;
-
-    @Autowired
-    public OrganisationService(OrganisationRepository organisationRepository) {
-        OrganisationService.organisationRepository = organisationRepository;
-    }
-
+    private final OrganisationRepository organisationRepository;
 
     public List<OrganisationResponseDTO> getAllOrganisations() {
         return organisationRepository.findAll()

@@ -7,6 +7,7 @@ import by.salary.agreementservice.service.AgreementListService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,14 +16,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/agreementlists")
+@RequiredArgsConstructor
 public class AgreementListController {
 
     private final AgreementListService agreementListService;
-
-    @Autowired
-    public AgreementListController(AgreementListService agreementListService) {
-        this.agreementListService = agreementListService;
-    }
 
     @Operation(summary = "View a list of available agreement lists")
     @ApiResponses(value = {

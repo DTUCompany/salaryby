@@ -6,6 +6,7 @@ import by.salary.agreementservice.exceptions.AgreementNotFoundException;
 import by.salary.agreementservice.model.AgreementStateRequestDTO;
 import by.salary.agreementservice.model.AgreementStateResponseDTO;
 import by.salary.agreementservice.repo.AgreementStateRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -14,16 +15,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class AgreementStateService {
 
     private final AgreementStateRepository agreementStateRepository;
     private final AgreementListService agreementListService;
 
-    @Autowired
-    public AgreementStateService(AgreementStateRepository agreementStateRepository, AgreementListService agreementListService) {
-        this.agreementStateRepository = agreementStateRepository;
-        this.agreementListService = agreementListService;
-    }
 
     public List<AgreementStateResponseDTO> getAllAgreementStates() {
         return agreementStateRepository.findAll().stream()

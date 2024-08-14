@@ -6,6 +6,7 @@ import by.salary.useragreementservice.repo.UserRepository;
 import by.salary.useragreementservice.service.CustomerService;
 import by.salary.useragreementservice.service.PaymentService;
 import io.swagger.v3.oas.annotations.Operation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,14 +15,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/payments")
+@RequiredArgsConstructor
 public class PaymentController {
 
     private final PaymentService paymentService;
-
-    @Autowired
-    public PaymentController(PaymentService paymentService) {
-        this.paymentService = paymentService;
-    }
 
     @Operation(summary = "Get all payments")
     @GetMapping

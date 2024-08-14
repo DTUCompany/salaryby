@@ -8,7 +8,7 @@ import by.salary.useragreementservice.model.PaymentRequestDTO;
 import by.salary.useragreementservice.model.PaymentResponseDTO;
 import by.salary.useragreementservice.repo.CustomerRepository;
 import by.salary.useragreementservice.repo.PaymentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -17,15 +17,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class PaymentService {
     private final PaymentRepository paymentRepository;
     private final CustomerRepository customerRepository;
-
-    @Autowired
-    public PaymentService(PaymentRepository paymentRepository, CustomerRepository customerRepository) {
-        this.paymentRepository = paymentRepository;
-        this.customerRepository = customerRepository;
-    }
 
     public List<PaymentResponseDTO> getAllPayments() {
         return paymentRepository.findAll().stream().map(PaymentResponseDTO::new).toList();
