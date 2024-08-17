@@ -33,28 +33,23 @@ public class PaymentService {
     }
 
     public PaymentResponseDTO createPayment(PaymentRequestDTO paymentRequestDTO) {
-        Payment payment = new Payment();
-        Optional<Customer> customer = customerRepository.findById(paymentRequestDTO.getCustomerId());
-
-        if (customer.isEmpty()) {
-            throw new PaymentNotFoundException("Customer with id " + paymentRequestDTO.getCustomerId() + " not found", HttpStatus.NOT_FOUND);
-        }
-
-        payment.setCustomer(customer.get());
-        payment.setName(paymentRequestDTO.getName());
-        payment.setDescription(paymentRequestDTO.getDescription());
-
-        Optional<Customer> moderator = customerRepository.findById(paymentRequestDTO.getModeratorId());
-
-        if (moderator.isEmpty()) {
-            throw new CustomerNotFoundException("Moderator with id " + paymentRequestDTO.getModeratorId() + " not found", HttpStatus.NOT_FOUND);
-        }
-
-        payment.setModerator(moderator.get());
-
-        payment.setModeratorComment(paymentRequestDTO.getModeratorComment());
-        payment.setPrice(paymentRequestDTO.getPrice());
-        payment.setDate(new Date(System.currentTimeMillis()));
+        Customer customer = customerRepository.findById(paymentRequestDTO.getCustomerId())
+                .orElseThrow(() -> new CustomerNotFoundException("Customer with id " + paymentRequestDTO.getCustomerId() + " not found", HttpStatus.NOT_FOUND));
+        String name = paymentRequestDTO.getName();
+        String description = paymentRequestDTO.getDescription();
+        Customer moderator = customerRepository.findById(paymentRequestDTO.getModeratorId())
+                .orElseThrow(() -> new CustomerNotFoundException("Moderator with id " + paymentRequestDTO.getModeratorId() + " not found", HttpStatus.NOT_FOUND));
+        String moderatorComment = paymentRequestDTO.getModeratorComment();
+        Double price = paymentRequestDTO.getPrice();
+        Date paymentDate = new Date(System.currentTimeMillis());
+        Payment payment = Payment.builder()
+                .customer(customer)
+                .name(name)
+                .description(description)
+                .moderator(moderator)
+                .moderatorComment(moderatorComment)
+                .price(price)
+                .date(paymentDate).build();
 
         paymentRepository.save(payment);
         return new PaymentResponseDTO(payment);

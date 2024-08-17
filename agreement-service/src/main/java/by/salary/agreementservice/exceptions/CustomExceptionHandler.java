@@ -12,6 +12,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = AbstractException.class)
     public ResponseEntity<Object> handleException(AbstractException exception, WebRequest request) {
+        System.out.println(exception.getStatus() + " "+ exception.getMessage());
         return handleExceptionInternal(
                 exception,
                 exception.getMessage(),
