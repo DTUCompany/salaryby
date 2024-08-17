@@ -14,7 +14,7 @@ import java.util.List;
 
 @Tag(name = "Agreement state controller", description = "Agreement state management system")
 @RestController
-@RequestMapping("/agreementstates")
+@RequestMapping("/agreement-states")
 @RequiredArgsConstructor
 public class AgreementStateController {
 
