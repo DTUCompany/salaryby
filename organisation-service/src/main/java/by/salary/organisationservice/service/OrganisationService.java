@@ -26,17 +26,12 @@ public class OrganisationService {
     }
 
     public OrganisationResponseDTO getOrganisationById(Long id) {
-        Optional<Organisation> organisation = organisationRepository.findById(id);
-
-        if(organisation.isEmpty()){
-            throw new OrganisationNotFoundException("Organisation not found", HttpStatus.NOT_FOUND);
-        }
-
-        return new OrganisationResponseDTO(organisation.get());
+        return organisationRepository.findById(id)
+                .map(OrganisationResponseDTO::new)
+                .orElseThrow(() -> new OrganisationNotFoundException("Organisation with id: " + id + " not found", HttpStatus.NOT_FOUND));
     }
 
     public OrganisationResponseDTO createOrganisation(OrganisationRequestDTO organisationRequestBody) {
-
         Organisation organisation = organisationRepository.save(new Organisation(organisationRequestBody));
         return new OrganisationResponseDTO(organisation);
     }

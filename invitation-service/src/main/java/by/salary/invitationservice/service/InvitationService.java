@@ -27,17 +27,12 @@ public class InvitationService {
     }
 
     public InvitationResponseDTO getInvitationCodeById(Long id) {
-        Optional<Invitation> invitation = invitationRepository.findById(id);
-
-        if(invitation.isEmpty()){
-            throw new InvitationNotFoundException("Invitation not found", HttpStatus.NOT_FOUND);
-        }
-
-        return new InvitationResponseDTO(invitation.get().getId(), invitation.get().getInvitationCode());
+        return invitationRepository.findById(id)
+                .map(InvitationResponseDTO::new)
+                .orElseThrow(() -> new InvitationNotFoundException("Invitation with id: " + id + " not found", HttpStatus.NOT_FOUND));
     }
 
     public InvitationResponseDTO createInvitationCode(InvitationRequestDTO invitationRequestDTO) {
-
         Invitation invitation = invitationRepository.save(new Invitation(invitationRequestDTO.getId(), invitationRequestDTO.getInvitationCode()));
         return new InvitationResponseDTO(invitation.getId(), invitation.getInvitationCode());
     }

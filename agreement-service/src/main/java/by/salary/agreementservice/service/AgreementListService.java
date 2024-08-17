@@ -33,11 +33,9 @@ public class AgreementListService {
     }
 
     public AgreementListResponseDTO getAgreementListById(Long agreementListId) {
-        Optional<AgreementListResponseDTO> agreementList = agreementListRepository.findById(agreementListId).map(AgreementListResponseDTO::new);
-        if (agreementList.isEmpty()) {
-            throw new AgreementNotFoundException("Agreement list with id: " + agreementListId + " not found", HttpStatus.NOT_FOUND);
-        }
-        return agreementList.get();
+        return agreementListRepository.findById(agreementListId)
+                .map(AgreementListResponseDTO::new)
+                .orElseThrow(() -> new AgreementNotFoundException("Agreement list with id: " + agreementListId + " not found", HttpStatus.NOT_FOUND));
     }
 
     public AgreementListResponseDTO createAgreementList(Long agreementId, AgreementListRequestDTO agreementListRequestDTO) {
@@ -49,20 +47,15 @@ public class AgreementListService {
     }
 
     public AgreementListResponseDTO updateAgreementList(Long agreementListId, AgreementListRequestDTO agreementListRequestDTO) {
-        Optional<AgreementList> agreementList = agreementListRepository.findById(agreementListId);
-        if (agreementList.isEmpty()) {
-            throw new AgreementNotFoundException("Agreement list with id: " + agreementListId + " not found", HttpStatus.NOT_FOUND);
-        }
-        agreementList.get().setAgreementListName(agreementListRequestDTO.getAgreementListName());
-        return new AgreementListResponseDTO(agreementListRepository.save(agreementList.get()));
+        AgreementList agreementList = agreementListRepository.findById(agreementListId)
+                .orElseThrow(() -> new AgreementNotFoundException("Agreement list with id: " + agreementListId + " not found", HttpStatus.NOT_FOUND));
+        agreementList.setAgreementListName(agreementListRequestDTO.getAgreementListName());
+        return new AgreementListResponseDTO(agreementListRepository.save(agreementList));
     }
 
     public AgreementList getAgreementListObjectById(Long agreementListId) {
-        Optional<AgreementList> agreementList = agreementListRepository.findById(agreementListId);
-        if (agreementList.isEmpty()) {
-            throw new AgreementNotFoundException("Agreement list with id: " + agreementListId + " not found", HttpStatus.NOT_FOUND);
-        }
-        return agreementList.get();
+        return agreementListRepository.findById(agreementListId)
+                .orElseThrow(() -> new AgreementNotFoundException("Agreement list with id: " + agreementListId + " not found", HttpStatus.NOT_FOUND));
     }
 
     public AgreementListResponseDTO deleteAgreementList(Long agreementListId) {

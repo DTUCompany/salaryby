@@ -27,13 +27,9 @@ public class PaymentService {
     }
 
     public PaymentResponseDTO getPaymentById(Long id) {
-        Optional<Payment> payment = paymentRepository.findById(id);
-
-        if (payment.isEmpty()) {
-            throw new PaymentNotFoundException("Payment with id " + id + " not found", HttpStatus.NOT_FOUND);
-        }
-
-        return new PaymentResponseDTO(payment.get());
+        return paymentRepository.findById(id)
+                .map(PaymentResponseDTO::new)
+                .orElseThrow(() -> new PaymentNotFoundException("Payment with id: " + id + " not found", HttpStatus.NOT_FOUND));
     }
 
     public PaymentResponseDTO createPayment(PaymentRequestDTO paymentRequestDTO) {

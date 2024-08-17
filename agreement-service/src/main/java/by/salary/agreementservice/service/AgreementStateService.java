@@ -7,7 +7,6 @@ import by.salary.agreementservice.model.AgreementStateRequestDTO;
 import by.salary.agreementservice.model.AgreementStateResponseDTO;
 import by.salary.agreementservice.repo.AgreementStateRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -35,11 +34,9 @@ public class AgreementStateService {
     }
 
     public AgreementStateResponseDTO getAgreementStateById(Long agreementStateId) {
-        Optional<AgreementState> agreementState = agreementStateRepository.findById(agreementStateId);
-        if (agreementState.isEmpty()) {
-            throw new AgreementNotFoundException("Agreement state with id: " + agreementStateId + " not found", HttpStatus.NOT_FOUND);
-        }
-        return new AgreementStateResponseDTO(agreementState.get());
+        return agreementStateRepository.findById(agreementStateId)
+                .map(AgreementStateResponseDTO::new)
+                .orElseThrow(() -> new AgreementNotFoundException("Agreement state with id: " + agreementStateId + " not found", HttpStatus.NOT_FOUND));
     }
 
     public AgreementStateResponseDTO createAgreementStateInAgreementList(Long agreementListId, AgreementStateRequestDTO agreementStateResponseDTO) {

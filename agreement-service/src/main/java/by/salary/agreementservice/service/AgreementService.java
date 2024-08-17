@@ -6,8 +6,6 @@ import by.salary.agreementservice.model.AgreementRequestDTO;
 import by.salary.agreementservice.model.AgreementResponseDTO;
 import by.salary.agreementservice.repo.AgreementRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -27,19 +25,14 @@ public class AgreementService {
     }
 
     public AgreementResponseDTO getAgreementById(Long id) {
-        Optional<Agreement> agreement = agreementRepository.findById(id);
-        if (agreement.isEmpty()) {
-            throw new AgreementNotFoundException("Agreement with id: " + id + " not found", HttpStatus.NOT_FOUND);
-        }
-        return new AgreementResponseDTO(agreement.get());
+        return agreementRepository.findById(id)
+                .map(AgreementResponseDTO::new)
+                .orElseThrow(() -> new AgreementNotFoundException("Agreement with id: " + id + " not found", HttpStatus.NOT_FOUND));
     }
 
     public Agreement getAgreementObjectById(Long id) {
-        Optional<Agreement> agreement = agreementRepository.findById(id);
-        if (agreement.isEmpty()) {
-            throw new AgreementNotFoundException("Agreement with id: " + id + " not found", HttpStatus.NOT_FOUND);
-        }
-        return agreement.get();
+        return agreementRepository.findById(id)
+                .orElseThrow(() -> new AgreementNotFoundException("Agreement with id: " + id + " not found", HttpStatus.NOT_FOUND));
     }
 
     public AgreementResponseDTO createAgreement(AgreementRequestDTO agreementRequestDTO) {

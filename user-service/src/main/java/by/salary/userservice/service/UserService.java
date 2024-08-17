@@ -30,12 +30,9 @@ public class UserService {
     }
 
     public UserResponseDTO getUserById(Long id) {
-        Optional<User> user = userRepository.findById(id);
-        if (user.isEmpty()) {
-            throw new UserNotFoundException("User not found", HttpStatus.NOT_FOUND);
-        }
-        return new UserResponseDTO(user.get());
-
+        return userRepository.findById(id)
+                .map(UserResponseDTO::new)
+                .orElseThrow(() -> new UserNotFoundException("User with id: " + id + " not found", HttpStatus.NOT_FOUND));
     }
 
     public UserResponseDTO createUser(UserRequestDTO userRequestDTO) {

@@ -27,13 +27,9 @@ public class CustomerService {
     }
 
     public CustomerResponseDTO getCustomerById(Long id) {
-        Optional<Customer> customer = customerRepository.findById(id);
-
-        if (customer.isEmpty()) {
-            throw new CustomerNotFoundException("Customer with id " + id + " not found", HttpStatus.NOT_FOUND);
-        }
-
-        return new CustomerResponseDTO(customer.get());
+        return customerRepository.findById(id)
+                .map(CustomerResponseDTO::new)
+                .orElseThrow(() -> new CustomerNotFoundException("Customer with id: " + id + " not found", HttpStatus.NOT_FOUND));
     }
 
     public CustomerResponseDTO createCustomer(CustomerRequestDTO customerRequestDTO) {
