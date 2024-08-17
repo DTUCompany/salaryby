@@ -30,7 +30,7 @@ public class AgreementStateController {
     @Operation(summary = "Get an agreement state by Id")
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public List<AgreementStateResponseDTO> getAgreementStateByAgreementListId(@PathVariable Long id) throws  AgreementNotFoundException{
+    public List<AgreementStateResponseDTO> getAgreementStatesListByAgreementListId(@PathVariable Long id) throws  AgreementNotFoundException{
         return agreementStateService.getAgreementStatesByAgreementListId(id);
     }
 
