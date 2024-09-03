@@ -3,6 +3,8 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
       <module name="test-service" target="21" />
+      <module name="test-service.main" target="21" />
+      <module name="test-service.test" target="21" />
     </bytecodeTargetLevel>
   </component>
 </project>

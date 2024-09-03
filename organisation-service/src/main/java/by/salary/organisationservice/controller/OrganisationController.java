@@ -6,13 +6,14 @@ import by.salary.organisationservice.model.OrganisationResponseDTO;
 import by.salary.organisationservice.service.OrganisationService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/organisations")
 public class OrganisationController {
 
     private final OrganisationService organisationService;
@@ -27,7 +28,7 @@ public class OrganisationController {
     @Operation(summary = "Get organisation by id")
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public OrganisationResponseDTO getOrganisationById(Long id) throws OrganisationNotFoundException {
+    public OrganisationResponseDTO getOrganisationById(@PathVariable Long id) throws OrganisationNotFoundException {
         return organisationService.getOrganisationById(id);
     }
 

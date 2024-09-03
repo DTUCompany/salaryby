@@ -5,11 +5,8 @@ import by.salary.agreementservice.model.AgreementRequestDTO;
 import by.salary.agreementservice.model.AgreementResponseDTO;
 import by.salary.agreementservice.service.AgreementService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

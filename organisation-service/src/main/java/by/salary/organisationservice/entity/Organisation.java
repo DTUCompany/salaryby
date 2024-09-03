@@ -3,13 +3,17 @@ package by.salary.organisationservice.entity;
 
 import by.salary.organisationservice.model.OrganisationRequestDTO;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "organisations")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Organisation {
 
     @Id

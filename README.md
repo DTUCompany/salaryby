@@ -3,6 +3,10 @@
 
 # To build  project open powershell in main directory and execute commands
 
+
+cd .\api-gateway\
+./gradlew clean build -x test
+cd ./..
 cd .\discovery-service\
 ./gradlew clean build -x test
 cd ./..
@@ -32,6 +36,9 @@ docker network create salaryby
 cd .\postgres\
 docker build -t salary-postgres .
 cd ./..
+cd .\api-gateway\
+docker build -t api-gateway .
+cd ./..
 cd .\mongo\
 docker build -t salary-mongo .
 cd ./..
@@ -57,6 +64,7 @@ docker build -t user-service .
 
 docker run -p 27017:27017 -d --name salary-mongo --network salaryby salary-mongo
 docker run -p 5432:5432 -d --name salary-postgres --network salaryby salary-postgres
+docker run -p 27017:27017 -d --name salary-mongo --network salaryby api-gateway
 docker run -p 8761:8761 -d --name discovery-service --network salaryby discovery-service
 docker run -p 8081:8081 -d --name agreement-service --network salaryby agreement-service
 docker run -p 8082:8082 -d --name invitation-service --network salaryby invitation-service
