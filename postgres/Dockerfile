@@ -1,4 +1,3 @@
-# Используем официальный образ PostgreSQL в качестве базового
 FROM postgres:latest
 
 ENV POSTGRES_USER=postgres

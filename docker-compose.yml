@@ -1,0 +1,88 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: BNf775^&*9065
+      POSTGRES_DB: salaryby
+    ports:
+      - "5432:5432"
+    container_name: salary-postgres
+  mongo:
+    build: ./mongo
+    container_name: salary-mongo
+    ports:
+      - "27017:27017"
+    command: mongod --auth
+  discovery-service:
+    build: ./discovery-service
+    ports:
+      - "8761:8761"
+    depends_on:
+      - postgres
+      - mongo
+    environment:
+      - SPRING_PROFILES_ACTIVE=compose
+    container_name: discovery-service
+  agreement-service:
+    build: ./agreement-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - discovery-service
+      - postgres
+    environment:
+      - SPRING_PROFILES_ACTIVE=compose
+    container_name: agreement-service
+  invitation-service:
+    build: ./invitation-service
+    container_name: invitation-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - mongo
+  organisation-service:
+    build: ./organisation-service
+    ports:
+      - "8083:8083"
+    depends_on:
+      - discovery-service
+      - postgres
+    environment:
+      - SPRING_PROFILES_ACTIVE=compose
+    container_name: organisation-service
+  user-agreement-service:
+    build: ./user-agreement-service
+    ports:
+      - "8084:8084"
+    depends_on:
+      - discovery-service
+      - postgres
+    environment:
+      - SPRING_PROFILES_ACTIVE=compose
+    container_name: user-agreement-service
+  user-service:
+    build: ./user-service
+    ports:
+      - "8085:8085"
+    depends_on:
+      - discovery-service
+      - postgres
+    environment:
+      - SPRING_PROFILES_ACTIVE=compose
+    container_name: user-service
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - discovery-service
+      - agreement-service
+      - invitation-service
+      - organisation-service
+      - user-agreement-service
+      - user-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=compose
+    container_name: api-gateway
